@@ -1,0 +1,102 @@
+# Project Bedrock - retail-store-sample values
+
+ui:
+  enabled: true
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 128m
+      memory: 256Mi
+    limits:
+      cpu: 250m
+      memory: 512Mi
+
+catalog:
+  enabled: true
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 128m
+      memory: 256Mi
+    limits:
+      cpu: 250m
+      memory: 512Mi
+  app:
+    persistence:
+      # Switch from in-memory to in-cluster MySQL
+      provider: mysql
+  mysql:
+    create: true
+    persistentVolume:
+      enabled: true
+      size: 8Gi
+
+carts:
+  enabled: true
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 128m
+      memory: 256Mi
+    limits:
+      cpu: 250m
+      memory: 512Mi
+  app:
+    persistence:
+      # Switch from in-memory to in-cluster DynamoDB Local
+      provider: dynamodb
+      dynamodb:
+        tableName: Items
+        createTable: true
+  dynamodb:
+    create: true
+
+checkout:
+  enabled: true
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 128m
+      memory: 256Mi
+    limits:
+      cpu: 250m
+      memory: 512Mi
+  app:
+    persistence:
+      # Switch from in-memory to in-cluster Redis
+      provider: redis
+      redis:
+        tls: false
+  redis:
+    create: true
+
+orders:
+  enabled: true
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 128m
+      memory: 256Mi
+    limits:
+      cpu: 250m
+      memory: 512Mi
+  app:
+    persistence:
+      # Switch from in-memory to in-cluster PostgreSQL
+      provider: postgresql
+    messaging:
+      # Switch from in-memory to in-cluster RabbitMQ
+      provider: rabbitmq
+  postgresql:
+    create: true
+    persistentVolume:
+      enabled: true
+      size: 8Gi
+  rabbitmq:
+    create: true
+    persistentVolume:
+      enabled: true
+      size: 8Gi
+
+app:
+  enabled: true
